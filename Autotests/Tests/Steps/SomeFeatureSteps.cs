@@ -192,7 +192,7 @@ namespace Tests.Steps
                     {
                         var n = Convert.ToInt32(item.Text);
                         var summa = Convert.ToInt32(previous.Text);
-                        Assert.IsTrue(n > summa);
+                        Assert.IsTrue(n >= summa);
                     }
                     catch 
                     {
