@@ -166,51 +166,5 @@ namespace Tests.Steps
             var s = (string)ScenarioContext.Current["item"];
             Assert.AreEqual(s, FindElementFromCssSelector("h1[class='title title_size_28 title_bold_yes']").Text);
         }
-
-        [Then(@"I click the Sort by price button")]
-        public void ThenIClickTheSortByPriceButton()
-        {
-            FindElementFromCssSelector("div[class='n-filter-sorter i-bem n-filter-sorter_js_inited']").Click();
-        }
-
-        [Then(@"check that the items on the page are sorted correctly")]
-        public void ThenCheckThatTheItemsOnThePageAreSortedCorrectly()
-        {
-            PageFactory.InitElements(driver, pageObjectIDs);
-
-            IWebElement s = pageObjectIDs.TableGridWithPrice;
-            List<IWebElement> content_data = new List<IWebElement>();
-            content_data = s.FindElements(By.CssSelector("div[class='price']")).ToList();
-
-            IWebElement previous = content_data.First();
-
-            foreach (IWebElement item in content_data)
-            {
-                if (item != previous)
-                {
-                    try
-                    {
-                        var n = Convert.ToInt32(item.Text);
-                        var summa = Convert.ToInt32(previous.Text);
-                        Assert.IsTrue(n >= summa);
-                    }
-                    catch 
-                    {
-                        Console.WriteLine("Неправильно строка переведена в число");
-                    }
-                }
-                previous = item;
-            }
-        }
-
-
-        private void assertCountOnPage(int countOnTheList)
-        {
-            ElementIsVisible(WaitForElement(By.CssSelector("div[class='n-snippet-list n-snippet-list_type_grid snippet-list_size_3 metrika b-zone b-spy-init b-spy-events i-bem metrika_js_inited snippet-list_js_inited b-spy-init_js_inited b-zone_js_inited']")));
-            IWebElement s = pageObjectIDs.TableGridWithPrice;
-
-            int listCount = s.FindElements(By.CssSelector("div[class='price']")).Count();
-            Assert.AreEqual(countOnTheList, listCount);
-        }
     }
 }
