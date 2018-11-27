@@ -20,15 +20,3 @@ Scenario Outline: Do Some Scenario
 	| subsection  | price | manufacturers      |
 	| smartphones | 20000 | iphone and samsung |
 	| headphones  | 5000  | beats              |
-
-	@test
-Scenario Outline: CheckSorted
-	Given I open browser and go to website page
-	Then I open the yandex market section
-	And Choose a subsection as a <subsection>
-	Then I click the Sort by price button
-	And check that the items on the page are sorted correctly
-
-	Examples: 
-	| subsection  |
-	| smartphones |
